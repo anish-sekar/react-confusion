@@ -3,6 +3,7 @@ import { Navbar, NavbarBrand } from "reactstrap";
 import Main from "./components/MainComponent";
 import { DISHES } from "./shared/dishes";
 import "./App.css";
+import { BrowserRouter } from "react-router-dom";
 
 class App extends Component {
   constructor(props) {
@@ -15,9 +16,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      // <div className="App">
+      // </div>
+      <BrowserRouter>
         <Main></Main>
-      </div>
+      </BrowserRouter>
     );
   }
 }
