@@ -1,26 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Card,
   CardImg,
-  CardImgOverlay,
   CardText,
   CardBody,
   Modal,
   ModalHeader,
   ModalBody,
   CardTitle,
-  Form,
-  FormGroup,
   Label,
   BreadcrumbItem,
   Breadcrumb,
   Button,
-  Dropdown,
-  Input,
-  DropdownItem,
-  DropdownMenu,
-  DropdownOpen,
-  DropdownToggle,
   Row,
   Col,
 } from "reactstrap";

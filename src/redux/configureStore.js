@@ -4,7 +4,6 @@ import { Comments } from "./comments";
 import { Dishes } from "./dishes";
 import { Leaders } from "./leaders";
 import { Promotions } from "./promotions";
-import { Reducer, initialState } from "./reducer";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { InitialFeedback } from "./forms";

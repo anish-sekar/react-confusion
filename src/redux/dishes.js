@@ -10,6 +10,7 @@ export const Dishes = (
 ) => {
   switch (action.type) {
     case ActionTypes.ADD_DISHES:
+      console.log("Add dishes called");
       return {
         ...state,
         isLoading: false,
@@ -17,6 +18,7 @@ export const Dishes = (
         dishes: action.payload,
       };
     case ActionTypes.DISHES_FAILED:
+      console.log(" dishes failed called");
       return {
         ...state,
         isLoading: false,
@@ -24,6 +26,7 @@ export const Dishes = (
         dishes: [],
       };
     case ActionTypes.DISHES_LOADING:
+      console.log("dishes loading called");
       return { ...state, isLoading: true, errmess: null, dishes: [] };
     default:
       return state;

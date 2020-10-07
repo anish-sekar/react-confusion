@@ -1,6 +1,5 @@
 import React from "react";
 import { Media } from "reactstrap";
-import { LEADERS } from "../shared/leaders";
 function RenderLeader(props) {
   return (
     <Media className="col-md-10 mt-5">

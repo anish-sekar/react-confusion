@@ -1,13 +1,10 @@
 import React from "react";
-import DishDetail from "./DishdetailComponent";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
 import {
   Card,
   CardImg,
   CardImgOverlay,
-  CardText,
-  CardBody,
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,

@@ -8,16 +8,21 @@ import {
   CardSubtitle,
 } from "reactstrap";
 import { Loading } from "./LoadingComponent";
+import { baseUrl } from "../shared/baseUrl";
 
-function RenderCard({ item, isLoading, errMessage }) {
+function RenderCard({ item, isLoading, errMess }) {
+  console.log("rendercard");
+  console.log(item);
+  console.log(isLoading);
+
   if (isLoading) {
     return <Loading />;
-  } else if (errMessage) {
-    return <h4>{errMessage}</h4>;
+  } else if (errMess) {
+    return <h4>{errMess}</h4>;
   } else {
     return (
       <Card>
-        <CardImg src={item.image} alt={item.name}></CardImg>
+        <CardImg src={baseUrl + item.image} alt={item.name}></CardImg>
         <CardBody>
           <CardTitle>{item.name}</CardTitle>
           {item.designation ? (
@@ -31,6 +36,8 @@ function RenderCard({ item, isLoading, errMessage }) {
 }
 
 function Home(props) {
+  console.log("in home");
+  console.log(props);
   return (
     <div className="container">
       <div className="row align-items-start">
@@ -42,10 +49,18 @@ function Home(props) {
           />
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={props.promotion} />
+          <RenderCard
+            item={props.promotion}
+            isLoading={props.promotionLoading}
+            errMess={props.promotionErrMess}
+          />
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={props.leader} />
+          <RenderCard
+            item={props.leader}
+            isLoading={props.leaderLoading}
+            errMess={props.leadersErrMess}
+          />
         </div>
       </div>
     </div>
