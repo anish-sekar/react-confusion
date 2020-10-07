@@ -11,8 +11,6 @@ export const Comments = (
     case ActionTypes.ADD_COMMENT:
       console.log("Add comment called");
       var comment = action.payload;
-      comment.id = state.comments.length;
-      comment.date = new Date().toISOString();
       return { ...state, comments: state.comments.concat(comment) };
     case ActionTypes.ADD_COMMENTS:
       return {

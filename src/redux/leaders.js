@@ -20,8 +20,8 @@ export const Leaders = (
       return {
         ...state,
         isLoading: false,
-        errmess: null,
-        leaders: action.payload,
+        errmess: action.payload,
+        leaders: [],
       };
     case ActionTypes.LEADERS_LOADING:
       return {

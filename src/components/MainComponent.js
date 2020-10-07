@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import Contact from "./ContactComponent";
 import { actions } from "react-redux-form";
 import {
-  addComment,
+  postComment,
   fetchDishes,
   fetchComments,
   fetchPromos,
@@ -27,8 +27,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addComment: (dishId, rating, author, comment) =>
-    dispatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) =>
+    dispatch(postComment(dishId, rating, author, comment)),
   fetchLeaders: () => dispatch(fetchLeaders()),
   fetchDishes: () => {
     dispatch(fetchDishes());
@@ -51,6 +51,7 @@ class Main extends Component {
     this.props.fetchDishes();
     this.props.fetchLeaders();
     this.props.fetchPromos();
+    this.props.fetchComments();
   }
   render() {
     const HomePage = () => {
@@ -91,7 +92,7 @@ class Main extends Component {
           comments={this.props.comments.comments.filter(
             (comment) => comment.dishId === parseInt(match.params.dishId, 10)
           )}
-          addComment={this.props.addComment}
+          postComment={this.props.postComment}
         />
       );
     };

@@ -19,6 +19,7 @@ import {
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+import { baseUrl } from "../shared/baseUrl";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -28,7 +29,7 @@ function RenderDish({ dish }) {
   if (dish != null) {
     return (
       <Card>
-        <CardImg top src={dish.image} alt={dish.name}></CardImg>
+        <CardImg top src={baseUrl + dish.image} alt={dish.name}></CardImg>
         <CardBody>
           <CardTitle>
             <strong>{dish.name}</strong>
@@ -41,7 +42,7 @@ function RenderDish({ dish }) {
     return <div></div>;
   }
 }
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
   if (comments != null) {
     const comments_all = comments.map((comment) => {
       return (
@@ -65,7 +66,7 @@ function RenderComments({ comments, addComment, dishId }) {
           <strong>Comments</strong>
         </h4>
         <ul className="list-unstyled">{comments_all}</ul>
-        <CommentForm dishId={dishId} addComment={addComment} />
+        <CommentForm dishId={dishId} postComment={postComment} />
       </div>
     );
   } else {
@@ -86,7 +87,7 @@ class CommentForm extends React.Component {
   }
 
   handleSubmit(values) {
-    this.props.addComment(
+    this.props.postComment(
       this.props.dishId,
       values.rating,
       values.author,
@@ -225,7 +226,7 @@ function DishDetail(props) {
             <div className="col-12 col-md-5 ">
               <RenderComments
                 comments={props.comments}
-                addComment={props.addComment}
+                postComment={props.postComment}
                 dishId={props.dish.id}
               ></RenderComments>
             </div>
