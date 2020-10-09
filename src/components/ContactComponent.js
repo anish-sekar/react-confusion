@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import { Control, Form, Errors } from "react-redux-form";
 import { Link } from "react-router-dom";
+import { baseUrl } from "../shared/baseUrl";
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -25,10 +26,43 @@ class Contact extends Component {
   }
 
   handleSubmit(values) {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
-    this.props.resetFeedbackForm();
+    // console.log("Current State is: " + JSON.stringify(values));
+    // alert("Current State is: " + JSON.stringify(values));
+
     // event.preventDefault();
+
+    fetch(baseUrl + "feedback", {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+    })
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              "Error " + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        (error) => {
+          let errorObj = new Error(error.message);
+          throw errorObj;
+        }
+      )
+      .then((response) => response.json())
+      .then((response) => alert(JSON.stringify(response)))
+      .catch((error) => {
+        alert(error.message);
+      });
+
+    this.props.resetFeedbackForm();
   }
 
   render() {

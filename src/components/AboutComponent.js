@@ -7,29 +7,40 @@ import {
   CardHeader,
   Media,
 } from "reactstrap";
+import { baseUrl } from "../shared/baseUrl";
 import { Link } from "react-router-dom";
 import RenderLeader from "./RenderLeader";
-function About(props) {
-  const leaders = props.leaders.map((leader) => {
-    return <RenderLeader leader={leader}></RenderLeader>;
-  });
+import { Loading } from "./LoadingComponent";
 
-  function RenderLeader(props) {
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
+
+function RenderLeaders({ leaders, isLoading, errMess }) {
+  if (isLoading) {
+    return <Loading />;
+  } else if (errMess) {
+    return <h4>{errMess}</h4>;
+  } else {
     return (
-      <Media className="col-md-10 mt-5">
-        <Media left top href="#">
-          <Media object src={props.leader.image} alt={props.leader.name} />
+      <Stagger in>
+        <Media list>
+          {leaders.map((leader) => {
+            return (
+              <Fade in>
+                <RenderLeader leader={leader}></RenderLeader>
+              </Fade>
+            );
+          })}
         </Media>
-        <Media body className="ml-5">
-          <Media heading>{props.leader.name}</Media>
-          {props.leader.designation}
-          <br></br>
-          <br></br>
-          {props.leader.description}
-        </Media>
-      </Media>
+      </Stagger>
     );
   }
+}
+
+function About(props) {
+  // const leaders = props.leaders.map((leader) => {
+  //   return <RenderLeader leader={leader}></RenderLeader>;
+  // });
+
   return (
     <div className="container">
       <div className="row">
@@ -106,7 +117,11 @@ function About(props) {
           <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <Media list>{leaders}</Media>
+          <RenderLeaders
+            leaders={props.leaders}
+            isLoading={props.isLoading}
+            errMess={props.errmess}
+          />
         </div>
       </div>
     </div>
